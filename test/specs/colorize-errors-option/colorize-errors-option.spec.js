@@ -20,12 +20,8 @@ describe("`validate.colorizeErrors` option", () => {
     }
   });
 
-  it("should colorize errors when set", async function () {
-    // @fixme Temporarily skipping this because `chalk` usage of `supports-color` is getting unset to level 0 in CI.
-    if (!host.ci) {
-      this.skip();
-    }
-
+  // @fixme Temporarily skipping this because `chalk` usage of `supports-color` is getting unset to level 0 in CI.
+  it.skip("should colorize errors when set", async () => {
     let parser = new SwaggerParser();
 
     try {
