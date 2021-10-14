@@ -4,7 +4,6 @@ const { expect } = require("chai");
 const SwaggerParser = require("../../..");
 const helper = require("../../utils/helper");
 const path = require("../../utils/path");
-const { host } = require("@jsdevtools/host-environment");
 
 describe("`validate.colorizeErrors` option", () => {
   it("should not colorize errors by default", async () => {
