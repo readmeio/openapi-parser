@@ -1,53 +1,51 @@
 name: CI
 
-on: [push]
-# on:
-#   push:
-#   pull_request:
-#   schedule:
-#     - cron: "0 0 1 * *"
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 1 * *"
 
 jobs:
-  # node_tests:
-  #   name: Node ${{ matrix.node }} on ${{ matrix.os }}
-  #   runs-on: ${{ matrix.os }}
-  #   timeout-minutes: 10
-  #   strategy:
-  #     fail-fast: true
-  #     matrix:
-  #       os:
-  #         - ubuntu-latest
-  #         # - macos-latest
-  #         # - windows-latest
-  #       node:
-  #         # - 10
-  #         - 12
-  #         - 14
-  #         - 16
+  node_tests:
+    name: Node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+          # - macos-latest
+          - windows-latest
+        node:
+          - 12
+          - 14
+          - 16
 
-  #   steps:
-  #     - name: Checkout source
-  #       uses: actions/checkout@v2.3.4
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2.3.4
 
-  #     - name: Install Node ${{ matrix.node }}
-  #       uses: actions/setup-node@v2.4.1
-  #       with:
-  #         node-version: ${{ matrix.node }}
+      - name: Install Node ${{ matrix.node }}
+        uses: actions/setup-node@v2.4.1
+        with:
+          node-version: ${{ matrix.node }}
 
-  #     - name: Install npm@7
-  #       run: npm install -g npm@7
+      - name: Install npm@7
+        run: npm install -g npm@7
 
-  #     - name: Install dependencies
-  #       run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-  #     - name: Run linter
-  #       run: npm run lint
+      - name: Run linter
+        run: npm run lint
 
-  #     - name: Run TypeScript tests
-  #       run: npm run test:typescript
+      - name: Run TypeScript tests
+        run: npm run test:typescript
 
-  #     - name: Run Node tests
-  #       run: npm run coverage:node
+      - name: Run Node tests
+        run: npm run coverage:node
 
   browser_tests:
     name: Browser
@@ -61,7 +59,6 @@ jobs:
           - firefox
         os:
           - ubuntu-latest
-          # - macos-latest
           - windows-latest
 
     steps:
