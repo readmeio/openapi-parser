@@ -87,7 +87,7 @@ jobs:
       #   if: matrix.browser == 'chrome'
       #   run: |
       #     chrome --version
-      #     CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=Chrome
+      #     CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=ChromeHeadless
 
       # Firefox
       - uses: browser-actions/setup-chrome@latest
@@ -96,12 +96,5 @@ jobs:
       - name: Run tests on Firefox
         if: matrix.browser == 'firefox'
         run: |
-          npm run coverage:browser -- --browsers=Firefox
-
-      # # Firefox
-      # - if: matrix.browser == 'firefox'
-      #   uses: browser-actions/setup-firefox@latest
-      # - if: matrix.browser == 'firefox'
-      #   name: Run tests on Firefox
-      #   run: npm run coverage:browser -- --browsers=Firefox
+          npm run coverage:browser -- --browsers=FirefoxHeadless
 
