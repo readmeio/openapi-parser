@@ -11,8 +11,8 @@ module.exports = karmaConfig({
   sourceDir: "lib",
   fixtures: "test/fixtures/**/*.js",
   browsers: {
-    chrome: host.ci ? host.os.linux : true,
-    firefox: host.ci ? host.os.linux : true,
+    chrome: true,
+    firefox: true,
     safari: host.os.mac,
     edge: false,
     ie: false,
