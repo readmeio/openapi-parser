@@ -57,8 +57,8 @@ jobs:
       fail-fast: true
       matrix:
         browser:
-          - chrome
-          # - firefox
+          # - chrome
+          - firefox
         os:
           - ubuntu-latest
           # - macos-latest
@@ -79,15 +79,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Chrome
-      - uses: browser-actions/setup-chrome@latest
-        if: matrix.browser == 'chrome'
+      # # Chrome
+      # - uses: browser-actions/setup-chrome@latest
+      #   if: matrix.browser == 'chrome'
 
-      - name: Run tests on Chrome
-        if: matrix.browser == 'chrome'
+      # - name: Run tests on Chrome
+      #   if: matrix.browser == 'chrome'
+      #   run: |
+      #     chrome --version
+      #     CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=Chrome
+
+      # Firefox
+      - uses: browser-actions/setup-chrome@latest
+        if: matrix.browser == 'firefox'
+
+      - name: Run tests on Firefox
+        if: matrix.browser == 'firefox'
         run: |
-          chrome --version
-          CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=Chrome
+          npm run coverage:browser -- --browsers=Firefox
 
       # # Firefox
       # - if: matrix.browser == 'firefox'
