@@ -82,11 +82,12 @@ jobs:
       # Chrome
       - uses: browser-actions/setup-chrome@latest
         if: matrix.browser == 'chrome'
-        run: chrome --version
 
       - name: Run tests on Chrome
         if: matrix.browser == 'chrome'
-        run: CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=Chrome
+        run: |
+          chrome --version
+          CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=Chrome
 
       # # Firefox
       # - if: matrix.browser == 'firefox'
