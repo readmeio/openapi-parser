@@ -82,7 +82,7 @@ jobs:
         if: matrix.browser == 'chrome'
 
       - name: Run tests on Chrome
-        run: npm run coverage:browser -- --browsers=Chrome
+        run: CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=Chrome
         if: matrix.browser == 'chrome'
 
       # # Firefox
