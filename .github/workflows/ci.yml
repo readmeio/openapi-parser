@@ -24,17 +24,31 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2
 
       - name: Install Node ${{ matrix.node }}
-        uses: actions/setup-node@v2.4.1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
+
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install npm@7
         run: npm install -g npm@7
 
       - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Run linter
@@ -46,50 +60,50 @@ jobs:
       - name: Run Node tests
         run: npm run coverage:node
 
-  browser_tests:
-    name: Browser
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
-    strategy:
-      fail-fast: true
-      matrix:
-        browser:
-          - chrome
-          - firefox
-        os:
-          - ubuntu-latest
-          - windows-latest
+  # browser_tests:
+  #   name: Browser
+  #   runs-on: ${{ matrix.os }}
+  #   timeout-minutes: 10
+  #   strategy:
+  #     fail-fast: true
+  #     matrix:
+  #       browser:
+  #         - chrome
+  #         - firefox
+  #       os:
+  #         - ubuntu-latest
+  #         - windows-latest
 
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v2.3.4
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v2
 
-      - name: Install Node
-        uses: actions/setup-node@v2.4.1
-        with:
-          node-version: 12
+  #     - name: Install Node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 12
 
-      - name: Install npm@7
-        run: npm install -g npm@7
+  #     - name: Install npm@7
+  #       run: npm install -g npm@7
 
-      - name: Install dependencies
-        run: npm ci
+  #     - name: Install dependencies
+  #       run: npm ci
 
-      # Chrome
-      - uses: browser-actions/setup-chrome@latest
-        if: matrix.browser == 'chrome'
+  #     # Chrome
+  #     - uses: browser-actions/setup-chrome@latest
+  #       if: matrix.browser == 'chrome'
 
-      - name: Run tests on Chrome
-        if: matrix.browser == 'chrome'
-        run: |
-          npm run coverage:browser -- --browsers=ChromeHeadless
+  #     - name: Run tests on Chrome
+  #       if: matrix.browser == 'chrome'
+  #       run: |
+  #         npm run coverage:browser -- --browsers=ChromeHeadless
 
-      # Firefox
-      - uses: browser-actions/setup-chrome@latest
-        if: matrix.browser == 'firefox'
+  #     # Firefox
+  #     - uses: browser-actions/setup-chrome@latest
+  #       if: matrix.browser == 'firefox'
 
-      - name: Run tests on Firefox
-        if: matrix.browser == 'firefox'
-        run: |
-          npm run coverage:browser -- --browsers=FirefoxHeadless
+  #     - name: Run tests on Firefox
+  #       if: matrix.browser == 'firefox'
+  #       run: |
+  #         npm run coverage:browser -- --browsers=FirefoxHeadless
 
