@@ -56,7 +56,9 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        browser: [chrome, firefox]
+        browser:
+          - chrome
+          # - firefox
         os:
           - ubuntu-latest
           # - macos-latest
@@ -80,10 +82,11 @@ jobs:
       # Chrome
       - uses: browser-actions/setup-chrome@latest
         if: matrix.browser == 'chrome'
+        run: chrome --version
 
       - name: Run tests on Chrome
-        run: CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=Chrome
         if: matrix.browser == 'chrome'
+        run: CHROMIUM_BIN=$(which chrome) npm run coverage:browser -- --browsers=Chrome
 
       # # Firefox
       # - if: matrix.browser == 'firefox'
