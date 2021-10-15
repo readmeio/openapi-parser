@@ -74,13 +74,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Chrome
+      - if: matrix.browser == 'chrome'
+        uses: browser-actions/setup-chrome@latest
       - if: matrix.browser == 'chrome'
         name: Run tests on Chrome
-        uses: browser-actions/setup-chrome@latest
         run: npm run coverage:browser -- --browsers=Chrome
 
+      # Firefox
+      - if: matrix.browser == 'firefox'
+        uses: browser-actions/setup-firefox@latest
       - if: matrix.browser == 'firefox'
         name: Run tests on Firefox
-        uses: browser-actions/setup-firefox@latest
         run: npm run coverage:browser -- --browsers=Firefox
 
