@@ -5,18 +5,17 @@
 "use strict";
 
 const { karmaConfig } = require("@jsdevtools/karma-config");
-// const { host } = require("@jsdevtools/host-environment");
+const { host } = require("@jsdevtools/host-environment");
 
 module.exports = karmaConfig({
-  CI: true,
   sourceDir: "lib",
   fixtures: "test/fixtures/**/*.js",
   browsers: {
-    chrome: true,
-    firefox: true,
-    safari: false, // host.ci ? host.os.linux : host.os.mac,    // SauceLabs in CI
-    edge: false, // host.ci ? host.os.linux : host.os.windows,  // SauceLabs in CI
-    ie: false, // host.ci ? host.os.windows : true,
+    chrome: host.ci ? host.os.linux : true,
+    firefox: host.ci ? host.os.linux : true,
+    safari: host.os.mac,
+    edge: false,
+    ie: false,
   },
   config: {
     exclude: [
