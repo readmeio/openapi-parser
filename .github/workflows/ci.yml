@@ -8,46 +8,46 @@ on: [push]
 #     - cron: "0 0 1 * *"
 
 jobs:
-  node_tests:
-    name: Node ${{ matrix.node }} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
-    strategy:
-      fail-fast: true
-      matrix:
-        os:
-          - ubuntu-latest
-          # - macos-latest
-          # - windows-latest
-        node:
-          # - 10
-          - 12
-          - 14
-          - 16
+  # node_tests:
+  #   name: Node ${{ matrix.node }} on ${{ matrix.os }}
+  #   runs-on: ${{ matrix.os }}
+  #   timeout-minutes: 10
+  #   strategy:
+  #     fail-fast: true
+  #     matrix:
+  #       os:
+  #         - ubuntu-latest
+  #         # - macos-latest
+  #         # - windows-latest
+  #       node:
+  #         # - 10
+  #         - 12
+  #         - 14
+  #         - 16
 
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v2.3.4
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v2.3.4
 
-      - name: Install Node ${{ matrix.node }}
-        uses: actions/setup-node@v2.4.1
-        with:
-          node-version: ${{ matrix.node }}
+  #     - name: Install Node ${{ matrix.node }}
+  #       uses: actions/setup-node@v2.4.1
+  #       with:
+  #         node-version: ${{ matrix.node }}
 
-      - name: Install npm@7
-        run: npm install -g npm@7
+  #     - name: Install npm@7
+  #       run: npm install -g npm@7
 
-      - name: Install dependencies
-        run: npm ci
+  #     - name: Install dependencies
+  #       run: npm ci
 
-      - name: Run linter
-        run: npm run lint
+  #     - name: Run linter
+  #       run: npm run lint
 
-      - name: Run TypeScript tests
-        run: npm run test:typescript
+  #     - name: Run TypeScript tests
+  #       run: npm run test:typescript
 
-      - name: Run Node tests
-        run: npm run coverage:node
+  #     - name: Run Node tests
+  #       run: npm run coverage:node
 
   browser_tests:
     name: Browser
@@ -64,10 +64,10 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
 
       - name: Install Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.4.1
         with:
           node-version: 12
 
@@ -79,8 +79,8 @@ jobs:
         if: matrix.browser == 'chrome'
 
       - name: Run tests on Chrome
-        if: matrix.browser == 'chrome'
         run: npm run coverage:browser -- --browsers=Chrome
+        if: matrix.browser == 'chrome'
 
       # # Firefox
       # - if: matrix.browser == 'firefox'
