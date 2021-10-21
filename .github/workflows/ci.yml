@@ -110,11 +110,8 @@ jobs:
 
       - name: Run tests on Chrome
         if: matrix.browser == 'chrome'
-        run: npm run coverage:browser -- --browsers=ChromeHeadless
-        env:
-          # `chalk` has troubles with color detection while on CI and also in how it's used within our tests.
-          # https://github.com/chalk/supports-color/issues/106
-          FORCE_COLOR: 1
+        run: |
+          npm run coverage:browser -- --browsers=ChromeHeadless
 
       # Firefox
       - uses: browser-actions/setup-chrome@latest
@@ -122,9 +119,6 @@ jobs:
 
       - name: Run tests on Firefox
         if: matrix.browser == 'firefox'
-        run: npm run coverage:browser -- --browsers=FirefoxHeadless
-        env:
-          # `chalk` has troubles with color detection while on CI and also in how it's used within our tests.
-          # https://github.com/chalk/supports-color/issues/106
-          FORCE_COLOR: 1
+        run: |
+          npm run coverage:browser -- --browsers=FirefoxHeadless
 
