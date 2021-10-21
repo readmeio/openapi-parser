@@ -19,8 +19,7 @@ describe("`validate.colorizeErrors` option", () => {
     }
   });
 
-  // @fixme Temporarily skipping this because `chalk` usage of `supports-color` is getting unset to level 0 in CI.
-  it.skip("should colorize errors when set", async () => {
+  it("should colorize errors when set", async () => {
     let parser = new OpenAPIParser();
 
     try {
