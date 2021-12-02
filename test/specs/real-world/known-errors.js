@@ -73,6 +73,12 @@ function getKnownApiErrors () {
       whatToDo: "ignore"
     },
 
+    {
+      api: "adyen.com:CheckoutService",
+      error: "unevaluatedProperties must NOT have unevaluated properties",
+      whatToDo: "ignore"
+    },
+
     // Cloudmersive.com's API definition contains invalid JSON Schema types
     {
       api: "cloudmersive.com:ocr",
