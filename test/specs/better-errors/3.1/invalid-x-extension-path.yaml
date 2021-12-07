@@ -1,0 +1,13 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Single Path
+servers:
+  - url: http://httpbin.org
+paths:
+  /anything:
+    get:
+      responses:
+        400:
+          description: OK
+          invalid-x-extension: true
