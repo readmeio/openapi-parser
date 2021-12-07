@@ -45,7 +45,7 @@
     "test": "npm run test:node && npm run test:typescript",
     "test:browser": "karma start --single-run",
     "test:node": "jest",
-    "test:typescript": "tsc --noEmit --strict --lib esnext,dom test/specs/typescript-definition.spec.ts"
+    "test:typescript": "tsc --noEmit --strict --lib esnext,dom __tests__/specs/typescript-definition.spec.ts"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.12.1",

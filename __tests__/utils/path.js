@@ -68,8 +68,8 @@ function filesystemPathHelpers() {
  */
 function urlPathHelpers() {
   // Get the URL of the "test" directory
-  const filename = document.querySelector('script[src*="/fixtures/"]').src;
-  const testsDir = `${filename.substr(0, filename.indexOf('/fixtures/'))}/`;
+  const filename = document.querySelector('script[src*="/__fixtures__/"]').src;
+  const testsDir = `${filename.substr(0, filename.indexOf('/__fixtures__/'))}/`;
 
   /**
    * URI-encodes the given file name
