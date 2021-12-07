@@ -38,13 +38,13 @@
     "clean": "shx rm -rf .nyc_output coverage",
     "coverage": "npm run coverage:node && npm run coverage:browser",
     "coverage:browser": "npm run test:browser -- --coverage",
-    "coverage:node": "nyc node_modules/mocha/bin/mocha",
-    "lint": "eslint lib test",
+    "coverage:node": "npm run test -- --coverage",
+    "lint": "eslint .",
     "prepare": "husky install",
     "pretest": "npm run lint",
     "test": "npm run test:node && npm run test:typescript",
     "test:browser": "karma start --single-run",
-    "test:node": "mocha",
+    "test:node": "jest",
     "test:typescript": "tsc --noEmit --strict --lib esnext,dom test/specs/typescript-definition.spec.ts"
   },
   "devDependencies": {
@@ -52,22 +52,23 @@
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
     "@jsdevtools/host-environment": "^2.1.2",
-    "@jsdevtools/karma-config": "^3.1.7",
     "@readme/eslint-config": "^8.0.2",
     "@types/node": "^16.11.0",
-    "chai": "^4.3.4",
     "eslint": "^8.3.0",
+    "expect": "^27.4.2",
     "husky": "^7.0.2",
-    "karma": "^6.3.4",
-    "karma-cli": "^2.0.0",
-    "mocha": "^9.1.3",
+    "jest": "^27.4.3",
+    "jest-mock": "^27.4.2",
+    "karma": "^6.3.9",
+    "karma-jasmine": "^4.0.1",
+    "karma-webpack": "^5.0.0",
     "node-fetch": "^2.6.1",
-    "nyc": "^15.1.0",
     "openapi-types": "^9.3.0",
     "prettier": "^2.5.0",
     "shx": "^0.3.2",
     "sinon": "^12.0.1",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "webpack": "^5.65.0"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "github:erunion/json-schema-ref-parser#fix/dates-as-strings",
@@ -83,6 +84,12 @@
     "openapi-types": ">=7"
   },
   "prettier": "@readme/eslint-config/prettier",
+  "jest": {
+    "testMatch": [
+      "<rootDir>/__tests__/**/*.spec.js",
+      "<rootDir>/__tests__/**/**/*.spec.js"
+    ]
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"

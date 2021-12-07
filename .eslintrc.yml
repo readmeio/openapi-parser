@@ -3,7 +3,6 @@ extends: "@readme/eslint-config"
 env:
   browser: true
   node: true
-  mocha: true
 rules:
   no-plusplus: off
   no-restricted-syntax: off
