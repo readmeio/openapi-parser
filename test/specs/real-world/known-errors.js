@@ -80,22 +80,22 @@ function getKnownApiErrors() {
 
     {
       api: 'adyen.com:CheckoutService',
-      error: 'unevaluatedProperties must NOT have unevaluated properties',
+      error: 'source is not expected to be here',
       whatToDo: 'ignore',
     },
     {
       api: 'adyen.com:PaymentService',
-      error: 'unevaluatedProperties must NOT have unevaluated properties',
+      error: 'source is not expected to be here',
       whatToDo: 'ignore',
     },
     {
       api: 'adyen.com:PayoutService',
-      error: 'unevaluatedProperties must NOT have unevaluated properties',
+      error: 'source is not expected to be here',
       whatToDo: 'ignore',
     },
     {
       api: 'adyen.com:RecurringService',
-      error: 'unevaluatedProperties must NOT have unevaluated properties',
+      error: 'source is not expected to be here',
       whatToDo: 'ignore',
     },
 
