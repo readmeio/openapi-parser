@@ -4,8 +4,6 @@ env:
   browser: true
   node: true
   mocha: true
-parserOptions:
-  ecmaVersion: 2020
 rules:
   no-plusplus: off
   no-restricted-syntax: off
