@@ -2,7 +2,7 @@ const { assert, expect } = require('chai');
 const OpenAPIParser = require('../../..');
 const path = require('../../utils/path');
 
-describe.only('Better errors', () => {
+describe('Better errors', () => {
   const tests = [
     {
       name: '[OpenAPI 3.0] invalid `x-` extension at the root level',
