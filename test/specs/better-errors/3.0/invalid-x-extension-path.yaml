@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Single Path
+  title: Invalid API
 servers:
-  - url: http://httpbin.org
+  - url: https://httpbin.org
 paths:
   /anything:
     get:
       responses:
         400:
           description: OK
-          invalid-x-extension: true
+          invalid-x-extension: true          # <---- this shouldn't be here

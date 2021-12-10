@@ -98,6 +98,11 @@ function getKnownApiErrors() {
       error: 'source is not expected to be here',
       whatToDo: 'ignore',
     },
+    {
+      api: 'clicksend.com',
+      error: '/paths/uploads?convert={convert}/post is missing path parameter(s) for {convert}',
+      whatToDo: 'ignore',
+    },
 
     // Cloudmersive.com's API definition contains invalid JSON Schema types
     {
@@ -142,6 +147,12 @@ function getKnownApiErrors() {
     },
 
     {
+      api: 'icons8.com',
+      error:
+        '/paths/api/iconsets/v3/latest?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}/get is missing path parameter(s) for {term}',
+      whatToDo: 'ignore',
+    },
+    {
       api: 'motaword.com',
       error: 'descriptipon is not expected to be here',
       whatToDo: 'ignore',
@@ -180,6 +191,11 @@ function getKnownApiErrors() {
     {
       api: 'rebilly.com',
       error: 'Token "feature" does not exist',
+      whatToDo: 'ignore',
+    },
+    {
+      api: 'staging-ecotaco.com',
+      error: '/paths/rides?page={page}&per_page={per_page}/post is missing path parameter(s) for {page},{per_page}',
       whatToDo: 'ignore',
     },
     {
