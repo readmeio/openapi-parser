@@ -28,7 +28,7 @@ describe('Invalid APIs (specification validation)', () => {
     expect(api).to.be.an('object');
   });
 
-  describe('swagger 2.0-specific cases', () => {
+  describe('Swagger 2.0-specific cases', () => {
     it('should catch invalid response codes', () => {
       return assertInvalid(
         '2.0/invalid-response-code.yaml',
@@ -85,6 +85,13 @@ describe('Invalid APIs (specification validation)', () => {
       );
     });
 
+    it("should catch if a required property in a component doesn't exist", () => {
+      return assertInvalid(
+        '2.0/required-property-not-defined-definitions.yaml',
+        "Validation failed. Property 'photoUrls' listed as required but does not exist in '/definitions/Pet'"
+      );
+    });
+
     it('should allow a `file` parameter with a vendor specific form-data `consumes` declaration', () => {
       return assertValid('2.0/file-vendor-specific-consumes-formdata.yaml');
     });
@@ -95,14 +102,14 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe('should catch duplicate header parameters', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/duplicate-header-params.yaml',
         'Validation failed. /paths/users/{username} has duplicate parameters \nValidation failed. Found multiple header parameters named "foo"'
       );
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/duplicate-header-params.yaml',
         'Validation failed. /paths/users/{username} has duplicate parameters \nValidation failed. Found multiple header parameters named "foo"'
@@ -111,14 +118,14 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe('should catch duplicate operation parameters', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/duplicate-operation-params.yaml',
         'Validation failed. /paths/users/{username}/get has duplicate parameters \nValidation failed. Found multiple path parameters named "username"'
       );
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/duplicate-operation-params.yaml',
         'Validation failed. /paths/users/{username}/get has duplicate parameters \nValidation failed. Found multiple path parameters named "username"'
@@ -127,14 +134,14 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe('should catch path parameters with no placeholder', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/path-param-no-placeholder.yaml',
         'Validation failed. /paths/users/{username}/post has a path parameter named "foo", but there is no corresponding {foo} in the path string'
       );
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/path-param-no-placeholder.yaml',
         'Validation failed. /paths/users/{username}/post has a path parameter named "foo", but there is no corresponding {foo} in the path string'
@@ -143,14 +150,14 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe('should catch path placeholders with no corresponding parameter', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/path-placeholder-no-param.yaml',
         'Validation failed. /paths/users/{username}/{foo}/get is missing path parameter(s) for {foo}'
       );
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/path-placeholder-no-param.yaml',
         'Validation failed. /paths/users/{username}/{foo}/get is missing path parameter(s) for {foo}'
@@ -159,14 +166,14 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe('should catch if no path parameters are present, but placeholders are', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/no-path-params.yaml',
         'Validation failed. /paths/users/{username}/{foo}/get is missing path parameter(s) for {username},{foo}'
       );
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/no-path-params.yaml',
         'Validation failed. /paths/users/{username}/{foo}/get is missing path parameter(s) for {username},{foo}'
@@ -175,14 +182,14 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe('should catch array parameters without a sibling `items`', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/array-no-items.yaml',
         'Validation failed. /paths/users/get/parameters/tags is an array, so it must include an "items" schema'
       );
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/array-no-items.yaml',
         'Validation failed. /paths/users/get/parameters/tags is an array, so it must include an "items" schema'
@@ -191,7 +198,7 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe('should catch array body parameters without a sibling `items`', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/array-body-no-items.yaml',
         'Validation failed. /paths/users/post/parameters/people is an array, so it must include an "items" schema'
@@ -199,7 +206,7 @@ describe('Invalid APIs (specification validation)', () => {
     });
 
     // @todo add a case for this
-    it.skip('openapi 3.x', () => {
+    it.skip('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/array-body-no-items.yaml',
         'Validation failed. /paths/users/post/parameters/people is an array, so it must include an "items" schema'
@@ -208,14 +215,14 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe('should catch array response headers without a sibling `items', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/array-response-header-no-items.yaml',
         'Validation failed. /paths/users/get/responses/default/headers/Last-Modified is an array, so it must include an "items" schema'
       );
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/array-response-header-no-items.yaml',
         'Validation failed. /paths/users/get/responses/default/headers/Last-Modified is an array, so it must include an "items" schema'
@@ -224,7 +231,7 @@ describe('Invalid APIs (specification validation)', () => {
   });
 
   describe("should catch if a required property in an input doesn't exist", () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/required-property-not-defined-input.yaml',
         "Validation failed. Property 'notExists' listed as required but does not exist in '/paths/pets/post/parameters/pet'"
@@ -232,7 +239,7 @@ describe('Invalid APIs (specification validation)', () => {
     });
 
     // @todo add a case for requestBody having a required property that doesn't exist in its schema
-    it.skip('openapi 3.x', () => {
+    it.skip('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/required-property-not-defined-input.yaml',
         "Validation failed. Property 'notExists' listed as required but does not exist in '/paths/pets/post/parameters/pet'"
@@ -240,56 +247,79 @@ describe('Invalid APIs (specification validation)', () => {
     });
   });
 
-  describe("should catch if a required property in a component doesn't exist", () => {
-    it('swagger 2.0', () => {
-      return assertInvalid(
-        '2.0/required-property-not-defined-definitions.yaml',
-        "Validation failed. Property 'photoUrls' listed as required but does not exist in '/definitions/Pet'"
-      );
-    });
-
-    it('openapi 3.x', () => {
-      return assertInvalid(
-        '3.x/required-property-not-defined-components.yaml',
-        "Validation failed. Property 'photoUrls' listed as required but does not exist in '/components/schemas/Pet'"
-      );
-    });
-  });
-
   describe('should allow schema-declared required properties to be inherited by an `allOf`', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertValid('2.0/inherited-required-properties.yaml');
     });
 
     // @tood add a case for this
-    it.skip('openapi 3.x', () => {
+    it.skip('OpenAPI 3.x', () => {
       return assertValid('3.x/inherited-required-properties.yaml');
     });
   });
 
   describe('should catch duplicate operation IDs', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid('2.0/duplicate-operation-ids.yaml', "Validation failed. Duplicate operation id 'users'");
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid('3.x/duplicate-operation-ids.yaml', "Validation failed. Duplicate operation id 'users'");
     });
   });
 
   describe('should catch array response bodies without a sibling `items`', () => {
-    it('swagger 2.0', () => {
+    it('Swagger 2.0', () => {
       return assertInvalid(
         '2.0/array-response-body-no-items.yaml',
         'Validation failed. /paths/users/get/responses/200/schema is an array, so it must include an "items" schema'
       );
     });
 
-    it('openapi 3.x', () => {
+    it('OpenAPI 3.x', () => {
       return assertInvalid(
         '3.x/array-response-body-no-items.yaml',
         'Validation failed. /paths/users/get/responses/200/content/application/json/schema is an array, so it must include an "items" schema'
       );
+    });
+  });
+
+  describe('should catch a component schema name that contains a space', () => {
+    it('OpenAPI 3.0', () => {
+      return assertInvalid(
+        '3.0/component-schema-with-space.yaml',
+        'Validation failed. /components/securitySchemes/Basic Access Authentication has an invalid name. Component names should match against: /^[a-zA-Z0-9.-_]+$/'
+      );
+    });
+
+    // Components with spaces is only **not** picked up with the 3.0 spec, so for 3.1 we can fallback to the normal
+    // schema validation -- which'll give us a different error message.
+    // @todo enable this after publishing https://github.com/readmeio/better-ajv-errors/pull/28
+    it.skip('OpenAPI 3.1', () => {
+      return assertInvalid('3.1/component-schema-with-space.yaml', 'TKTK');
+    });
+  });
+
+  describe('should catch a component schema name that contains invalid characters', () => {
+    it('Swagger 2.0', () => {
+      return assertInvalid(
+        '2.0/component-schema-with-invalid-characters.yaml',
+        'Validation failed. /definitions/User«Information» has an invalid name. Definition names should match against: /^[a-zA-Z0-9.-_]+$/'
+      );
+    });
+
+    it('OpenAPI 3.0', () => {
+      return assertInvalid(
+        '3.0/component-schema-with-invalid-characters.yaml',
+        'Validation failed. /components/schemas/User«Information» has an invalid name. Component names should match against: /^[a-zA-Z0-9.-_]+$/'
+      );
+    });
+
+    // Components with invalid characters is only **not** picked up with the 3.0 spec, so for 3.1 we can fallback to the
+    // normal schema validation -- which'll give us a different error message.
+    // @todo enable this after publishing https://github.com/readmeio/better-ajv-errors/pull/28
+    it.skip('OpenAPI 3.1', () => {
+      return assertInvalid('3.1/component-schema-with-invalid-characters.yaml', 'TKTK');
     });
   });
 });
