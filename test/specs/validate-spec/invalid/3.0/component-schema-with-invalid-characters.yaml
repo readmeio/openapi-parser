@@ -3,7 +3,7 @@ info:
   version: "1.0"
   title: Invalid API
 paths:
-  "/info":
+  /anything:
     get:
       responses:
         '200':

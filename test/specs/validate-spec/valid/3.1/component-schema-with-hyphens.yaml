@@ -13,10 +13,10 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/User«Information»"
+                  "$ref": "#/components/schemas/User-Information"
 components:
   schemas:
-    User«Information»:    # <---- component names should match ^[a-zA-Z0-9\.\-_]+$
+    User-Information:
       type: object
       properties:
         first:

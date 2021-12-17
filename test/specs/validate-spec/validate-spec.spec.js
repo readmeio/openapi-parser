@@ -284,42 +284,52 @@ describe('Invalid APIs (specification validation)', () => {
     });
   });
 
-  describe('should catch a component schema name that contains a space', () => {
-    it('OpenAPI 3.0', () => {
-      return assertInvalid(
-        '3.0/component-schema-with-space.yaml',
-        'Validation failed. /components/securitySchemes/Basic Access Authentication has an invalid name. Component names should match against: /^[a-zA-Z0-9.-_]+$/'
-      );
+  describe('components / definitions', () => {
+    describe('should allow a component schema name that contains hyphens', () => {
+      it('Swagger 2.0', () => assertValid('2.0/definition-name-with-hyphens.yaml'));
+
+      it('OpenAPI 3.0', () => assertValid('3.0/component-schema-with-hyphens.yaml'));
+
+      it('OpenAPI 3.1', () => assertValid('3.1/component-schema-with-hyphens.yaml'));
     });
 
-    // Components with spaces is only **not** picked up with the 3.0 spec, so for 3.1 we can fallback to the normal
-    // schema validation -- which'll give us a different error message.
-    // @todo enable this after publishing https://github.com/readmeio/better-ajv-errors/pull/28
-    it.skip('OpenAPI 3.1', () => {
-      return assertInvalid('3.1/component-schema-with-space.yaml', 'TKTK');
-    });
-  });
+    describe('should catch a component schema name that contains a space', () => {
+      it('OpenAPI 3.0', () => {
+        return assertInvalid(
+          '3.0/component-schema-with-space.yaml',
+          'Validation failed. /components/securitySchemes/Basic Access Authentication has an invalid name. Component names should match against: /^[a-zA-Z0-9.-_]+$/'
+        );
+      });
 
-  describe('should catch a component schema name that contains invalid characters', () => {
-    it('Swagger 2.0', () => {
-      return assertInvalid(
-        '2.0/component-schema-with-invalid-characters.yaml',
-        'Validation failed. /definitions/User«Information» has an invalid name. Definition names should match against: /^[a-zA-Z0-9.-_]+$/'
-      );
-    });
-
-    it('OpenAPI 3.0', () => {
-      return assertInvalid(
-        '3.0/component-schema-with-invalid-characters.yaml',
-        'Validation failed. /components/schemas/User«Information» has an invalid name. Component names should match against: /^[a-zA-Z0-9.-_]+$/'
-      );
+      // Components with spaces is only **not** picked up with the 3.0 spec, so for 3.1 we can fallback to the normal
+      // schema validation -- which'll give us a different error message.
+      // @todo enable this after publishing https://github.com/readmeio/better-ajv-errors/pull/28
+      it.skip('OpenAPI 3.1', () => {
+        return assertInvalid('3.1/component-schema-with-space.yaml', 'TKTK');
+      });
     });
 
-    // Components with invalid characters is only **not** picked up with the 3.0 spec, so for 3.1 we can fallback to the
-    // normal schema validation -- which'll give us a different error message.
-    // @todo enable this after publishing https://github.com/readmeio/better-ajv-errors/pull/28
-    it.skip('OpenAPI 3.1', () => {
-      return assertInvalid('3.1/component-schema-with-invalid-characters.yaml', 'TKTK');
+    describe('should catch a component schema name that contains invalid characters', () => {
+      it('Swagger 2.0', () => {
+        return assertInvalid(
+          '2.0/definition-schema-with-invalid-characters.yaml',
+          'Validation failed. /definitions/User«Information» has an invalid name. Definition names should match against: /^[a-zA-Z0-9.-_]+$/'
+        );
+      });
+
+      it('OpenAPI 3.0', () => {
+        return assertInvalid(
+          '3.0/component-schema-with-invalid-characters.yaml',
+          'Validation failed. /components/schemas/User«Information» has an invalid name. Component names should match against: /^[a-zA-Z0-9.-_]+$/'
+        );
+      });
+
+      // Components with invalid characters is only **not** picked up with the 3.0 spec, so for 3.1 we can fallback to the
+      // normal schema validation -- which'll give us a different error message.
+      // @todo enable this after publishing https://github.com/readmeio/better-ajv-errors/pull/28
+      it.skip('OpenAPI 3.1', () => {
+        return assertInvalid('3.1/component-schema-with-invalid-characters.yaml', 'TKTK');
+      });
     });
   });
 });
