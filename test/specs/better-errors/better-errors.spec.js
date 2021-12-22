@@ -10,7 +10,7 @@ function assertInvalid(file, error) {
     .catch(err => {
       // console.log(err.message);
       expect(err).to.be.an.instanceOf(SyntaxError);
-      expect(err.message).to.match(new RegExp(error));
+      expect(err.message).to.contain(error);
     });
 }
 
@@ -47,6 +47,13 @@ describe('Better errors', () => {
 
     it('OpenAPI 3.0', () =>
       assertInvalid('3.0/misplaced-additionalProperty.yaml', 'originalRef is not expected to be here'));
+  });
+
+  // The JSON Schema for OpenAPI 3.1 is the only schema available that can properly detect these within AJV so we're
+  // only testing that here. OpenAPI 3.0 and Swagger 2.0 have tests cases for this under within the `validate-spec`
+  // suite.
+  describe('invalid component name', () => {
+    it('OpenAPI 3.1', () => assertInvalid('3.1/invalid-component-name.yaml', 'must match pattern ^[a-zA-Z0-9._-]+$'));
   });
 
   describe('missing component', () => {
