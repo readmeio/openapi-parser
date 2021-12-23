@@ -15,8 +15,7 @@ function assertInvalid(file, error) {
     })
     .catch(err => {
       expect(err).to.be.an.instanceOf(SyntaxError);
-      expect(err.message).to.equal(error);
-      expect(err.message).to.match(/^Validation failed. \S+/);
+      expect(err.message).to.contain(error);
     });
 }
 
@@ -252,7 +251,7 @@ describe('Invalid APIs (specification validation)', () => {
       return assertValid('2.0/inherited-required-properties.yaml');
     });
 
-    // @tood add a case for this
+    // @todo add a case for this
     it.skip('OpenAPI 3.x', () => {
       return assertValid('3.x/inherited-required-properties.yaml');
     });
@@ -284,6 +283,22 @@ describe('Invalid APIs (specification validation)', () => {
     });
   });
 
+  describe('should catch invalid discriminators', () => {
+    // Invalid discriminators are only **not** picked up with the 3.1 spec, so for 3.0 we can fall back to our normal
+    // schema validation -- which'll give us a different error message.
+    it('OpenAPI 3.0', () => {
+      return assertInvalid('3.0/invalid-discriminator.yaml', 'type must be object');
+    });
+
+    // @todo We can't yet write validation for this because our OpenAPI (and Swagger) spec validators don't have the
+    // best, or fastest, handling for nested schemas. It would likely be easier and faster to use something like
+    // `jsonpath` but that library unfortunately would add a lot of bloat to this library and it doesn't play well with
+    // browsers.
+    it.skip('OpenAPI 3.1', () => {
+      return assertInvalid('3.1/invalid-discriminator.yaml', 'TKTK');
+    });
+  });
+
   describe('components / definitions', () => {
     describe('should allow a component schema name that contains hyphens', () => {
       it('Swagger 2.0', () => assertValid('2.0/definition-name-with-hyphens.yaml'));
@@ -303,9 +318,8 @@ describe('Invalid APIs (specification validation)', () => {
 
       // Components with spaces is only **not** picked up with the 3.0 spec, so for 3.1 we can fallback to the normal
       // schema validation -- which'll give us a different error message.
-      // @todo enable this after publishing https://github.com/readmeio/better-ajv-errors/pull/28
-      it.skip('OpenAPI 3.1', () => {
-        return assertInvalid('3.1/component-schema-with-space.yaml', 'TKTK');
+      it('OpenAPI 3.1', () => {
+        return assertInvalid('3.1/component-schema-with-space.yaml', 'PROPERTY must match pattern "^[a-zA-Z0-9._-]+$');
       });
     });
 
@@ -326,9 +340,11 @@ describe('Invalid APIs (specification validation)', () => {
 
       // Components with invalid characters is only **not** picked up with the 3.0 spec, so for 3.1 we can fallback to the
       // normal schema validation -- which'll give us a different error message.
-      // @todo enable this after publishing https://github.com/readmeio/better-ajv-errors/pull/28
-      it.skip('OpenAPI 3.1', () => {
-        return assertInvalid('3.1/component-schema-with-invalid-characters.yaml', 'TKTK');
+      it('OpenAPI 3.1', () => {
+        return assertInvalid(
+          '3.1/component-schema-with-invalid-characters.yaml',
+          'PROPERTY must match pattern "^[a-zA-Z0-9._-]+$'
+        );
       });
     });
   });
