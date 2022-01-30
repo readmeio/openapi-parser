@@ -6,11 +6,11 @@ const path = require('../../utils/path');
 const parsedAPI = require('./parsed');
 const dereferencedAPI = require('./dereferenced');
 
-describe('API with $refs to unknown file types', () => {
+describe('API with $refs to unknown file types', function () {
   let windowOnError;
   let testDone;
 
-  beforeEach(() => {
+  beforeEach(function () {
     // Some old Webkit browsers throw an error when downloading zero-byte files.
     windowOnError = host.global.onerror;
     host.global.onerror = function () {
@@ -19,11 +19,11 @@ describe('API with $refs to unknown file types', () => {
     };
   });
 
-  afterEach(() => {
+  afterEach(function () {
     host.global.onerror = windowOnError;
   });
 
-  it('should parse successfully', async () => {
+  it('should parse successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.parse(path.rel('specs/unknown/unknown.yaml'));
 
@@ -48,7 +48,7 @@ describe('API with $refs to unknown file types', () => {
     )
   );
 
-  it('should dereference successfully', async () => {
+  it('should dereference successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.dereference(path.rel('specs/unknown/unknown.yaml'));
 
@@ -71,7 +71,7 @@ describe('API with $refs to unknown file types', () => {
     );
   });
 
-  it('should validate successfully', async () => {
+  it('should validate successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.validate(path.rel('specs/unknown/unknown.yaml'));
 
@@ -94,7 +94,7 @@ describe('API with $refs to unknown file types', () => {
     );
   });
 
-  it('should bundle successfully', async () => {
+  it('should bundle successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.bundle(path.rel('specs/unknown/unknown.yaml'));
 

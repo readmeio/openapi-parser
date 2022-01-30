@@ -6,8 +6,8 @@ const parsedAPI = require('./parsed');
 const dereferencedAPI = require('./dereferenced');
 const bundledAPI = require('./bundled');
 
-describe('Object sources (instead of file paths)', () => {
-  it('should dereference an object that references external files', async () => {
+describe('Object sources (instead of file paths)', function () {
+  it('should dereference an object that references external files', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.dereference(helper.cloneDeep(parsedAPI.api));
     expect(api).to.equal(parser.api);
@@ -30,7 +30,7 @@ describe('Object sources (instead of file paths)', () => {
       .to.equal(api.paths['/people/{name}'].get.responses['200'].schema.properties.last);
   });
 
-  it('should bundle an object that references external files', async () => {
+  it('should bundle an object that references external files', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.bundle(helper.cloneDeep(parsedAPI.api));
     expect(api).to.equal(parser.api);
@@ -46,7 +46,7 @@ describe('Object sources (instead of file paths)', () => {
     expect(parser.$refs.values()).to.have.keys(expectedPaths);
   });
 
-  it('should validate an object that references external files', async () => {
+  it('should validate an object that references external files', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.dereference(helper.cloneDeep(parsedAPI.api));
     expect(api).to.equal(parser.api);

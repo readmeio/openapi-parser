@@ -6,8 +6,8 @@ const parsedAPI = require('./parsed');
 const dereferencedAPI = require('./dereferenced');
 const bundledAPI = require('./bundled');
 
-describe('API with deeply-nested circular $refs', () => {
-  it('should parse successfully', async () => {
+describe('API with deeply-nested circular $refs', function () {
+  it('should parse successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.parse(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(api).to.equal(parser.api);
@@ -27,7 +27,7 @@ describe('API with deeply-nested circular $refs', () => {
     )
   );
 
-  it('should dereference successfully', async () => {
+  it('should dereference successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.dereference(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(api).to.equal(parser.api);
@@ -48,7 +48,7 @@ describe('API with deeply-nested circular $refs', () => {
       );
   });
 
-  it('should validate successfully', async () => {
+  it('should validate successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.validate(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(api).to.equal(parser.api);
@@ -69,7 +69,7 @@ describe('API with deeply-nested circular $refs', () => {
       );
   });
 
-  it('should bundle successfully', async () => {
+  it('should bundle successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.bundle(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(api).to.equal(parser.api);

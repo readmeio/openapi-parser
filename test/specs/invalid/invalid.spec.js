@@ -3,8 +3,8 @@ const OpenAPIParser = require('../../..');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
 
-describe("Invalid APIs (can't be parsed)", () => {
-  it('not a Swagger API', async () => {
+describe("Invalid APIs (can't be parsed)", function () {
+  it('not a Swagger API', async function () {
     try {
       await OpenAPIParser.parse(path.rel('specs/invalid/not-swagger.yaml'));
       helper.shouldNotGetCalled();
@@ -14,7 +14,7 @@ describe("Invalid APIs (can't be parsed)", () => {
     }
   });
 
-  it('not a valid OpenAPI 3.1 definition', async () => {
+  it('not a valid OpenAPI 3.1 definition', async function () {
     try {
       await OpenAPIParser.parse(path.rel('specs/invalid/no-paths-or-webhooks.yaml'));
       helper.shouldNotGetCalled();
@@ -24,7 +24,7 @@ describe("Invalid APIs (can't be parsed)", () => {
     }
   });
 
-  it('invalid Swagger version (1.2)', async () => {
+  it('invalid Swagger version (1.2)', async function () {
     try {
       await OpenAPIParser.dereference(path.rel('specs/invalid/old-version.yaml'));
       helper.shouldNotGetCalled();
@@ -34,7 +34,7 @@ describe("Invalid APIs (can't be parsed)", () => {
     }
   });
 
-  it('invalid Swagger version (3.0)', async () => {
+  it('invalid Swagger version (3.0)', async function () {
     try {
       await OpenAPIParser.bundle(path.rel('specs/invalid/newer-version.yaml'));
       helper.shouldNotGetCalled();
@@ -44,7 +44,7 @@ describe("Invalid APIs (can't be parsed)", () => {
     }
   });
 
-  it('numeric Swagger version (instead of a string)', async () => {
+  it('numeric Swagger version (instead of a string)', async function () {
     try {
       await OpenAPIParser.validate(path.rel('specs/invalid/numeric-version.yaml'));
       helper.shouldNotGetCalled();
@@ -54,7 +54,7 @@ describe("Invalid APIs (can't be parsed)", () => {
     }
   });
 
-  it('numeric API version (instead of a string)', async () => {
+  it('numeric API version (instead of a string)', async function () {
     try {
       await OpenAPIParser.validate(path.rel('specs/invalid/numeric-info-version.yaml'));
       helper.shouldNotGetCalled();

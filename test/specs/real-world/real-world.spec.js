@@ -8,7 +8,7 @@ const MAX_APIS_TO_TEST = host.node && process.argv.includes('--quick-test') ? 10
 const START_AT_INDEX = 0;
 const MAX_DOWNLOAD_RETRIES = 3;
 
-describe('Real-world APIs', () => {
+describe('Real-world APIs', function () {
   beforeEach(function () {
     // Increase the timeouts by A LOT because:
     //   1) CI is really slow

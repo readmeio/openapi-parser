@@ -8,6 +8,7 @@ if (host.browser) {
   mocha.globals(['$0', '$1', '$2', '$3', '$4', '$5', 'ga', 'gaplugins', 'gaGlobal', 'gaData']);
 }
 
+// eslint-disable-next-line mocha/no-top-level-hooks
 beforeEach(function () {
   // Most of our tests perform multiple AJAX requests,
   // so we need to increase the timeouts to allow for that
