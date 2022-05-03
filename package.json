@@ -41,7 +41,7 @@
     "clean": "shx rm -rf .nyc_output coverage",
     "coverage": "npm run coverage:node && npm run coverage:browser",
     "coverage:browser": "npm run test:browser -- --coverage",
-    "coverage:node": "nyc node_modules/mocha/bin/mocha",
+    "coverage:node": "nyc mocha",
     "lint": "eslint lib test",
     "prepare": "husky install",
     "pretest": "npm run lint",
