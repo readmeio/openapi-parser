@@ -5,8 +5,8 @@ const OpenAPIParser = require('../../..');
 const helper = require('../../utils/helper');
 const path = require('../../utils/path');
 
-describe('`validate.colorizeErrors` option', () => {
-  it('should not colorize errors by default', async () => {
+describe('`validate.colorizeErrors` option', function () {
+  it('should not colorize errors by default', async function () {
     const parser = new OpenAPIParser();
 
     try {

@@ -8,8 +8,8 @@ const bundledAPI = require('./bundled');
 const dereferencedAPI = require('./dereferenced');
 const parsedAPI = require('./parsed');
 
-describe('API with deeply-nested circular $refs', () => {
-  it('should parse successfully', async () => {
+describe('API with deeply-nested circular $refs', function () {
+  it('should parse successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.parse(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(api).to.equal(parser.api);
@@ -29,11 +29,12 @@ describe('API with deeply-nested circular $refs', () => {
     )
   );
 
-  it('should dereference successfully', async () => {
+  it('should dereference successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.dereference(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(api).to.equal(parser.api);
     expect(api).to.deep.equal(dereferencedAPI);
+
     // Reference equality
     expect(api.paths['/family-tree'].get.responses['200'].schema.properties.name.type)
       .to.equal(api.paths['/family-tree'].get.responses['200'].schema.properties.level1.properties.name.type)
@@ -50,11 +51,12 @@ describe('API with deeply-nested circular $refs', () => {
       );
   });
 
-  it('should validate successfully', async () => {
+  it('should validate successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.validate(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(api).to.equal(parser.api);
     expect(api).to.deep.equal(dereferencedAPI);
+
     // Reference equality
     expect(api.paths['/family-tree'].get.responses['200'].schema.properties.name.type)
       .to.equal(api.paths['/family-tree'].get.responses['200'].schema.properties.level1.properties.name.type)
@@ -71,7 +73,7 @@ describe('API with deeply-nested circular $refs', () => {
       );
   });
 
-  it('should bundle successfully', async () => {
+  it('should bundle successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.bundle(path.rel('specs/deep-circular/deep-circular.yaml'));
     expect(api).to.equal(parser.api);

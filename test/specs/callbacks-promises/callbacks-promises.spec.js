@@ -8,9 +8,9 @@ const bundledAPI = require('./bundled');
 const dereferencedAPI = require('./dereferenced');
 const parsedAPI = require('./parsed');
 
-describe('Callback & Promise syntax', () => {
+describe('Callback & Promise syntax', function () {
   for (const method of ['parse', 'resolve', 'dereference', 'bundle', 'validate']) {
-    describe(`${method} method`, () => {
+    describe(`${method} method`, function () {
       it('should call the callback function upon success', testCallbackSuccess(method));
       it('should call the callback function upon failure', testCallbackError(method));
       it('should resolve the Promise upon success', testPromiseSuccess(method));

@@ -9,9 +9,9 @@ const dereferencedAPI = require('./dereferenced');
 const parsedAPI = require('./parsed');
 const validatedAPI = require('./validated');
 
-// @fixme temporarily skipped due to problems with the upgrade to @apidevtools/json-schema-ref-parser
-describe.skip('API with circular (recursive) $refs', () => {
-  it('should parse successfully', async () => {
+// @fixme temporarily skipped due to problems with the upgrade to `@apidevtools/json-schema-ref-parser`
+describe.skip('API with circular (recursive) $refs', function () {
+  it('should parse successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.parse(path.rel('specs/circular/circular.yaml'));
     expect(api).to.equal(parser.api);
@@ -35,40 +35,44 @@ describe.skip('API with circular (recursive) $refs', () => {
     )
   );
 
-  it('should dereference successfully', async () => {
+  it('should dereference successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.dereference(path.rel('specs/circular/circular.yaml'));
     expect(api).to.equal(parser.api);
     expect(api).to.deep.equal(dereferencedAPI);
+
     // Reference equality
     expect(api.definitions.person.properties.spouse).to.equal(api.definitions.person);
     expect(api.definitions.parent.properties.children.items).to.equal(api.definitions.child);
     expect(api.definitions.child.properties.parents.items).to.equal(api.definitions.parent);
   });
 
-  it('should validate successfully', async () => {
+  it('should validate successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.validate(path.rel('specs/circular/circular.yaml'));
     expect(api).to.equal(parser.api);
     expect(api).to.deep.equal(validatedAPI.fullyDereferenced);
+
     // Reference equality
     expect(api.definitions.person.properties.spouse).to.equal(api.definitions.person);
     expect(api.definitions.parent.properties.children.items).to.equal(api.definitions.child);
     expect(api.definitions.child.properties.parents.items).to.equal(api.definitions.parent);
   });
 
-  it('should not dereference circular $refs if "options.dereference.circular" is "ignore"', async () => {
+  it('should not dereference circular $refs if "options.dereference.circular" is "ignore"', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.validate(path.rel('specs/circular/circular.yaml'), {
       dereference: { circular: 'ignore' },
     });
+
     expect(api).to.equal(parser.api);
     expect(api).to.deep.equal(validatedAPI.ignoreCircular$Refs);
+
     // Reference equality
     expect(api.paths['/pet'].get.responses['200'].schema).to.equal(api.definitions.pet);
   });
 
-  it('should fail validation if "options.dereference.circular" is false', async () => {
+  it('should fail validation if "options.dereference.circular" is false', async function () {
     const parser = new OpenAPIParser();
 
     try {
@@ -80,7 +84,7 @@ describe.skip('API with circular (recursive) $refs', () => {
     }
   });
 
-  it('should bundle successfully', async () => {
+  it('should bundle successfully', async function () {
     const parser = new OpenAPIParser();
     const api = await parser.bundle(path.rel('specs/circular/circular.yaml'));
     expect(api).to.equal(parser.api);

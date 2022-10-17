@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const OpenAPIParser = require('../../..');
 const path = require('../../utils/path');
 
-describe('Invalid APIs (Swagger 2.0 schema validation)', () => {
+describe('Invalid APIs (Swagger 2.0 schema validation)', function () {
   const tests = [
     {
       name: 'invalid response code',
@@ -110,7 +110,7 @@ describe('Invalid APIs (Swagger 2.0 schema validation)', () => {
     },
   ];
 
-  it('should pass validation if "options.validate.schema" is false', async () => {
+  it('should pass validation if "options.validate.schema" is false', async function () {
     const invalid = tests[0];
     expect(invalid.valid).to.equal(false);
 
@@ -121,8 +121,9 @@ describe('Invalid APIs (Swagger 2.0 schema validation)', () => {
   });
 
   for (const test of tests) {
+    // eslint-disable-next-line mocha/no-setup-in-describe
     if (test.valid) {
-      it(test.name, async () => {
+      it(test.name, async function () {
         try {
           const api = await OpenAPIParser.validate(path.rel(`specs/validate-schema/valid/${test.file}`));
           expect(api).to.be.an('object');
@@ -131,7 +132,7 @@ describe('Invalid APIs (Swagger 2.0 schema validation)', () => {
         }
       });
     } else {
-      it(test.name, async () => {
+      it(test.name, async function () {
         try {
           await OpenAPIParser.validate(path.rel(`specs/validate-schema/invalid/${test.file}`));
           throw new Error('Validation should have failed, but it succeeded!');
