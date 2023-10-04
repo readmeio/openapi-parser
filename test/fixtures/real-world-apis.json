@@ -310,11 +310,6 @@
     "url": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-name-autocomplete/1.0.3/swagger.yaml"
   },
   {
-    "name": "amadeus.com:amadeus-hotel-ratings",
-    "version": "1.0.2",
-    "url": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-ratings/1.0.2/swagger.yaml"
-  },
-  {
     "name": "amadeus.com:amadeus-hotel-search",
     "version": "3.0.8",
     "url": "https://api.apis.guru/v2/specs/amadeus.com/amadeus-hotel-search/3.0.8/swagger.yaml"

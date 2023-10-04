@@ -35,6 +35,9 @@ fetch('https://api.apis.guru/v2/list.json')
     // "type array but found type null at #/paths//vault/callback/get/security"
     delete apis['apideck.com:vault'];
 
+    // real validation issues
+    delete apis['amadeus.com:amadeus-hotel-ratings'];
+
     return apis;
   })
   .then(apis => {
