@@ -1,4 +1,3 @@
-const { host } = require('@jsdevtools/host-environment');
 const { expect } = require('chai');
 
 const OpenAPIParser = require('../..');
@@ -42,13 +41,8 @@ const helper = {
 
       // Resolved file paths
       expect($refs.paths()).to.have.same.members(expectedFiles);
-      if (host.node) {
-        expect($refs.paths(['file'])).to.have.same.members(expectedFiles);
-        expect($refs.paths('http')).to.be.an('array').with.lengthOf(0);
-      } else {
-        expect($refs.paths(['http', 'https'])).to.have.same.members(expectedFiles);
-        expect($refs.paths('fs')).to.be.an('array').with.lengthOf(0);
-      }
+      expect($refs.paths(['file'])).to.have.same.members(expectedFiles);
+      expect($refs.paths('http')).to.be.an('array').with.lengthOf(0);
 
       // Resolved values
       const values = $refs.values();
