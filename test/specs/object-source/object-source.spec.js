@@ -7,7 +7,7 @@ const bundledAPI = require('./bundled');
 const dereferencedAPI = require('./dereferenced');
 const parsedAPI = require('./parsed');
 
-describe.only('Object sources (instead of file paths)', () => {
+describe('Object sources (instead of file paths)', () => {
   it('should dereference an object that references external files', async () => {
     const parser = new OpenAPIParser();
     const api = await parser.dereference(structuredClone(parsedAPI.api));
