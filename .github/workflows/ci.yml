@@ -41,7 +41,7 @@ jobs:
         run: npm run test:typescript
 
       - name: Run Node tests
-        run: npm run coverage:node
+        run: npm run coverage
         env:
           # `chalk` has troubles with color detection while on CI and also in how it's used within our tests.
           # https://github.com/chalk/supports-color/issues/106
