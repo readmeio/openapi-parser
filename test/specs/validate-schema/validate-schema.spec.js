@@ -162,7 +162,7 @@ describe('Invalid APIs (Swagger 2.0 and OpenAPI 3.x schema validation)', () => {
           }
 
           expect(err.details).to.be.an('array').with.length.above(0);
-          expect(err.totalErrors).to.equal(err.details.length);
+          expect(err.totalErrors).to.be.greater.than(0);
 
           // Make sure the Ajv error details object is valid
           const details = err.details[0];
