@@ -67,22 +67,6 @@ const helper = {
 
     return value;
   },
-
-  /**
-   * Creates a deep clone of the given value.
-   */
-  cloneDeep(value) {
-    let clone = value;
-    if (value && typeof value === 'object') {
-      clone = Array.isArray(value) ? [] : {};
-      const keys = Object.keys(value);
-      for (let i = 0; i < keys.length; i++) {
-        clone[keys[i]] = helper.cloneDeep(value[keys[i]]);
-      }
-    }
-
-    return clone;
-  },
 };
 
 module.exports = helper;
