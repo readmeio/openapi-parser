@@ -964,9 +964,6 @@
           "default": false,
           "type": "boolean"
         },
-        "schema": {
-          "$dynamicRef": "#meta"
-        },
         "content": {
           "$ref": "#/$defs/content",
           "minProperties": 1,
