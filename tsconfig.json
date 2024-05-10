@@ -1,32 +1,27 @@
 {
+  // TODO: delete
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
 
-    "outDir": "lib",
+    "outDir": "kanaddarren",
     "sourceMap": true,
     "declaration": true,
 
-    "newLine": "LF",
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictBindCallApply": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "stripInternal": true,
+    // "newLine": "LF",
+    // "forceConsistentCasingInFileNames": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "noImplicitAny": true,
+    // "noImplicitThis": true,
+    // "strictBindCallApply": true,
+    // "strictNullChecks": true,
+    // "strictPropertyInitialization": true,
+    // "stripInternal": true,
 
-    "typeRoots": [
-      "node_modules/@types",
-      "src/typings"
-    ]
+    // "typeRoots": ["node_modules/@types", "src/typings"]
   },
-  "include": [
- "lib/validators/schemas/json-schema.js", "lib/validators/schemas/index.js"  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["lib/validators/schemas/json-schema.ts", "lib/validators/schemas/index.ts"],
+  "exclude": ["node_modules/"]
 }
