@@ -46,7 +46,6 @@
     "test": "vitest run --coverage"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.12.1",
     "@jsdevtools/host-environment": "^2.1.2",
     "@readme/eslint-config": "^14.0.0",
     "@types/node": "^20.12.7",
@@ -71,10 +70,5 @@
   "peerDependencies": {
     "openapi-types": ">=7"
   },
-  "prettier": "@readme/eslint-config/prettier",
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  }
+  "prettier": "@readme/eslint-config/prettier"
 }
