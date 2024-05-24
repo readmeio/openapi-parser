@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
@@ -8,7 +8,7 @@ export default defineConfig({
       '**/dist/**',
 
       // This test is better served by native TS typings. Ignoring until we have those.
-      '**/typescript-definition.spec.ts'
+      '**/typescript-definition.spec.ts',
     ],
 
     /**
@@ -19,5 +19,5 @@ export default defineConfig({
      * @see {@link https://github.com/vitest-dev/vitest/issues/566}
      */
     pool: 'forks',
-  }
-})
+  },
+});

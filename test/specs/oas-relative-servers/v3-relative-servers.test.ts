@@ -1,6 +1,6 @@
 import $RefParser from '@readme/json-schema-ref-parser';
 import sinon from 'sinon';
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 import OpenAPIParser from '../../../lib';
 import path from '../../utils/path';

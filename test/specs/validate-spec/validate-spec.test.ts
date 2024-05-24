@@ -3,7 +3,7 @@ import { describe, it, expect, assert } from 'vitest';
 import OpenAPIParser from '../../..';
 import path from '../../utils/path';
 
-function assertValid(file: string ) {
+function assertValid(file: string) {
   return OpenAPIParser.validate(path.rel(`specs/validate-spec/valid/${file}`)).then(api => {
     expect(api).to.be.an('object');
   });

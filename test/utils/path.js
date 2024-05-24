@@ -1,5 +1,5 @@
-const nodePath = require('path')
-const nodeUrl = require('url')
+const nodePath = require('path');
+const nodeUrl = require('url');
 
 const testsDir = nodePath.resolve(__dirname, '..');
 const isWindows = /^win/.test(process.platform);

@@ -87,7 +87,7 @@ describe('API with $refs to unknown file types', () => {
 
     api.paths['/files/text'].get.responses['200'].default = helper.convertNodeBuffersToPOJOs(
       dereferencedAPI.paths['/files/text'].get.responses['200'].default,
-    )
+    );
 
     api.paths['/files/html'].get.responses['200'].default = helper.convertNodeBuffersToPOJOs(
       dereferencedAPI.paths['/files/html'].get.responses['200'].default,

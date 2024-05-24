@@ -19,18 +19,15 @@ const openapiObject: OpenAPI.Document = {
     title: 'My API',
     version: '1.0.0',
   },
-  paths: {}
+  paths: {},
 };
-
 
 // OpenAPIParser class instance
 const parser = new OpenAPIParser();
 
-
 // OpenAPIParser instance properties
 assert(parser.$refs.circular === true);
 assert(parser.api.info.title === 'My API');
-
 
 // OpenAPIParser instance methods (with callbacks)
 parser.bundle(openapiPath, callback);
@@ -68,7 +65,6 @@ parser.resolve(openapiObject, options, callback);
 parser.resolve(baseUrl, openapiPath, options, callback);
 parser.resolve(baseUrl, openapiObject, options, callback);
 
-
 // OpenAPIParser instance methods (with Promises)
 parser.bundle(openapiPath).then(promiseResolve, promiseReject);
 parser.bundle(openapiObject).then(promiseResolve, promiseReject);
@@ -105,7 +101,6 @@ parser.resolve(openapiObject, options).then(promiseResolve, promiseReject);
 parser.resolve(baseUrl, openapiPath, options).then(promiseResolve, promiseReject);
 parser.resolve(baseUrl, openapiObject, options).then(promiseResolve, promiseReject);
 
-
 // OpenAPIParser static methods (with callbacks)
 OpenAPIParser.bundle(openapiPath, callback);
 OpenAPIParser.bundle(openapiObject, callback);
@@ -141,7 +136,6 @@ OpenAPIParser.resolve(openapiPath, options, callback);
 OpenAPIParser.resolve(openapiObject, options, callback);
 OpenAPIParser.resolve(baseUrl, openapiPath, options, callback);
 OpenAPIParser.resolve(baseUrl, openapiObject, options, callback);
-
 
 // OpenAPIParser static methods (with Promises)
 OpenAPIParser.bundle(openapiPath).then(promiseResolve, promiseReject);

@@ -82,7 +82,9 @@ describe('Callback & Promise syntax', () => {
     });
 
     it('should reject the Promise upon failure', async () => {
-      await expect(OpenAPIParser[method](path.rel('specs/callbacks-promises/callbacks-promises-error.yaml'))).rejects.toThrow(SyntaxError)
+      await expect(
+        OpenAPIParser[method](path.rel('specs/callbacks-promises/callbacks-promises-error.yaml')),
+      ).rejects.toThrow(SyntaxError);
     });
   });
 });
