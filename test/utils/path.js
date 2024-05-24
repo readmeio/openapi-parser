@@ -1,4 +1,3 @@
-
 const nodePath = require('path')
 const nodeUrl = require('url')
 
@@ -6,6 +5,7 @@ const testsDir = nodePath.resolve(__dirname, '..');
 const isWindows = /^win/.test(process.platform);
 
 // Run all tests from the "test" directory
+// eslint-disable-next-line vitest/require-hook
 process.chdir(nodePath.join(__dirname, '..'));
 
 /**

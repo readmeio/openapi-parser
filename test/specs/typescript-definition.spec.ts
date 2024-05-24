@@ -1,30 +1,35 @@
-import * as assert from "assert";
-import { OpenAPI } from "openapi-types";
-import * as OpenAPIParser from "../../lib";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable vitest/require-hook */
+/* eslint-disable vitest/consistent-test-filename */
+import type { OpenAPI } from 'openapi-types';
 
-const baseUrl = "http://example.com/api";
-const openapiPath = "my-api.json";
+import * as assert from 'assert';
+
+import * as OpenAPIParser from '../../lib';
+
+const baseUrl = 'http://example.com/api';
+const openapiPath = 'my-api.json';
 const options = {};
 const promiseResolve = (_: object) => undefined;
 const promiseReject = (_: Error) => undefined;
 const callback = (_err: Error | null, _api?: object) => undefined;
 const openapiObject: OpenAPI.Document = {
-  openapi: "3.0.0",
+  openapi: '3.0.0',
   info: {
-    title: "My API",
-    version: "1.0.0",
+    title: 'My API',
+    version: '1.0.0',
   },
   paths: {}
 };
 
 
 // OpenAPIParser class instance
-let parser = new OpenAPIParser();
+const parser = new OpenAPIParser();
 
 
 // OpenAPIParser instance properties
 assert(parser.$refs.circular === true);
-assert(parser.api.info.title === "My API");
+assert(parser.api.info.title === 'My API');
 
 
 // OpenAPIParser instance methods (with callbacks)

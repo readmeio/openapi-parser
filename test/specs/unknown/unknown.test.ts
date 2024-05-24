@@ -1,11 +1,11 @@
-const { expect } = require('chai');
+import { describe, it, expect } from 'vitest';
 
-const OpenAPIParser = require('../../..');
-const helper = require('../../utils/helper');
-const path = require('../../utils/path');
+import OpenAPIParser from '../../..';
+import * as helper from '../../utils/helper';
+import path from '../../utils/path';
 
-const dereferencedAPI = require('./dereferenced');
-const parsedAPI = require('./parsed');
+import dereferencedAPI from './dereferenced';
+import parsedAPI from './parsed';
 
 describe('API with $refs to unknown file types', () => {
   it('should parse successfully', async () => {
@@ -87,7 +87,7 @@ describe('API with $refs to unknown file types', () => {
 
     api.paths['/files/text'].get.responses['200'].default = helper.convertNodeBuffersToPOJOs(
       dereferencedAPI.paths['/files/text'].get.responses['200'].default,
-    );
+    )
 
     api.paths['/files/html'].get.responses['200'].default = helper.convertNodeBuffersToPOJOs(
       dereferencedAPI.paths['/files/html'].get.responses['200'].default,
