@@ -43,7 +43,7 @@
     "pretest": "npm run lint",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --check --write .",
-    "test": "vitest run --coverage --testTimeout=9000"
+    "test": "vitest run --coverage"
   },
   "devDependencies": {
     "@readme/eslint-config": "^14.0.0",
