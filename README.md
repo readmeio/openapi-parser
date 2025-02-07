@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> `@readme/openapi-parser` has moved! The source for this library now lives at https://github.com/readmeio/oas.
+
 # Swagger 2.0 and OpenAPI 3.x parser/validator
 
 [![Build Status](https://github.com/readmeio/openapi-parser/workflows/CI/badge.svg?branch=main)](https://github.com/readmeio/openapi-parser/actions)
